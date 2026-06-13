@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>GeoTIFF Viewer</title>
+  <link rel="stylesheet" href="../node_modules/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="toolbar">
+    <button id="load-tiff">GeoTIFF</button>
+    <button id="load-photos">Photo</button>
+    <button id="load-vector">Vector</button>
+    <button id="settings-btn">⚙</button>
+  </div>
+
+  <!-- ベクターレイヤー一覧パネル -->
+  <div id="vector-panel" class="hidden">
+    <div id="vector-list"></div>
+  </div>
+
+  <!-- 設定パネル -->
+  <div id="settings-panel" class="hidden">
+    <div class="settings-section-title">GeoTIFF</div>
+    <div class="settings-row">
+      <label class="settings-label" for="transparent-black">黒画素を透過</label>
+      <input type="checkbox" id="transparent-black" />
+    </div>
+    <div class="settings-row" id="threshold-row">
+      <label class="settings-label" for="black-threshold">閾値 <span id="threshold-value">10</span></label>
+      <input type="range" id="black-threshold" min="0" max="50" step="1" value="10" />
+    </div>
+    <div class="settings-divider"></div>
+    <div class="settings-section-title">写真マーカー</div>
+    <div class="settings-row">
+      <label class="settings-label" for="marker-radius">サイズ <span id="marker-radius-value">6</span>px</label>
+      <input type="range" id="marker-radius" min="3" max="24" step="1" value="6" />
+    </div>
+    <div class="settings-divider"></div>
+    <div class="settings-section-title">Vector マーカー</div>
+    <div class="settings-row">
+      <label class="settings-label" for="vector-marker-radius">サイズ <span id="vector-marker-radius-value">7</span>px</label>
+      <input type="range" id="vector-marker-radius" min="3" max="24" step="1" value="7" />
+    </div>
+  </div>
+
+  <!-- 進捗オーバーレイ -->
+  <div id="progress-overlay" class="hidden">
+    <div id="progress-inner">
+      <div class="spinner"></div>
+      <span id="progress-msg">処理中…</span>
+    </div>
+  </div>
+
+  <!-- 写真モーダル -->
+  <div id="photo-modal" class="hidden">
+    <div id="photo-modal-inner">
+      <button id="photo-close">✕</button>
+      <img id="photo-img" src="" alt="撮影写真" />
+      <p id="photo-name"></p>
+    </div>
+  </div>
+
+  <div id="map"></div>
+
+  <!-- クリック座標表示 -->
+  <div id="coord-bar" class="hidden">
+    <span id="coord-text"></span>
+    <span id="coord-copy-hint">クリックでコピー</span>
+  </div>
+
+  <!-- Leaflet -->
+  <script src="../node_modules/leaflet/dist/leaflet.js"></script>
+  <!--
+    georaster-layer-for-leaflet.min.js は georaster を内包した完全バンドル。
+    window.parseGeoraster と window.GeoRasterLayer の両方を公開する。
+  -->
+  <script src="../node_modules/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

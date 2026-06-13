@@ -1,0 +1,58 @@
+{
+  "name": "geo-electron",
+  "version": "1.0.0",
+  "description": "GIS Viewer – GeoTIFF / Photo / Vector",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win --x64",
+    "build:mac": "electron-builder --mac --x64"
+  },
+  "build": {
+    "appId": "ai.chloros.geo-viewer",
+    "productName": "GeoViewer",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "preload-photo.js",
+      "tile-generator.js",
+      "renderer/**/*",
+      "node_modules/**/*",
+      "!node_modules/electron/**/*",
+      "!node_modules/.cache/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "exifr": "^7.1.3",
+    "fs-extra": "^11.2.0",
+    "geotiff": "^1.0.0-beta.13",
+    "georaster": "^1.6.0",
+    "georaster-layer-for-leaflet": "^4.1.2",
+    "leaflet": "^1.9.4",
+    "pngjs": "^7.0.0",
+    "proj4": "^2.20.8"
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^26.8.1"
+  }
+}
