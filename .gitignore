@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Tile cache (GeoTIFF変換後のキャッシュ)
+*_tiles/
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# Electron log
+*.log
+
+# Editor
+.vscode/
+.idea/
+
+# env
+.env
